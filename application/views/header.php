@@ -18,7 +18,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link text-white" href="<?php echo site_url('home'); ?>">Home</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="<?php echo site_url('employees'); ?>">Empleados</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="<?php echo site_url('auth/login'); ?>">Login</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="<?php echo site_url('login/logout'); ?>">Logout</a></li>
                 </ul>
             </div>
         </div>

@@ -1,18 +1,26 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Employees extends CI_Controller {
+
+class Employees extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Employee'); // Cargar el modelo
-        $this->load->helper('url'); // Cargar helper de URL
+        $this->load->model('Employee');
+        $this->load->helper('url');         
     }
 
     /**
      * Listar todos los empleados
      */
     public function index() {
+
+        if ($this->session->userdata('role_id') != 1) {
+            $this->load->view('errors/forbidden');
+            return;
+        }
+        
+
         $data['employees'] = $this->Employee->get_all_employees();
         //$this->load->view('employees/home', $data);
         //$this->load->view('employees/list', $data);
