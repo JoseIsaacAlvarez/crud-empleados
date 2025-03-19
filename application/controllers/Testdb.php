@@ -5,11 +5,12 @@ class Testdb extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Employees'); // Cargar el modelo
+        $this->load->model('Employee'); // Cargar el modelo
     }
 
     public function index() {
-        $employees = $this->Employees->get_all_employees();
+        $employees = $this->Employee->get_all_employees();
+        //print_r($employees);
 
         echo "<h2>Lista de Empleados</h2>";
         echo "<table border='1'>";

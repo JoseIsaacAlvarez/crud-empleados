@@ -1,11 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Employees extends CI_Model {
+class Employee extends CI_Model {
 
     public function __construct() {
-        parent::__construct();
-        //$this->load->database(); // Cargar la base de datos
+        parent::__construct();        
     }
 
     /**
@@ -24,7 +23,7 @@ class Employees extends CI_Model {
      * Obtener un empleado por su ID
      */
     public function get_employee_by_id($id) {
-        $this->db->select('e.*, d.departament_name, r.role_name');
+        $this->db->select('e.*, d.department_name, r.role_name');
         $this->db->from('employees e');
         $this->db->join('departments d', 'e.department_id = d.department_id', 'left');
         $this->db->join('roles r', 'e.role_id = r.role_id', 'left');
