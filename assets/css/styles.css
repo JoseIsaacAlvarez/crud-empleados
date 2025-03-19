@@ -1,0 +1,8 @@
+body {
+    padding-top: 30px; /* Ajusta según la altura del navbar */
+    padding-bottom: 50px; /* Espacio para el footer */
+}
+
+.background_color_footer {
+    background-color: #CCE5FF;
+}

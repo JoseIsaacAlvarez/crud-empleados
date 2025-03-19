@@ -15,7 +15,9 @@ class Employees extends CI_Controller {
     public function index() {
         $data['employees'] = $this->Employee->get_all_employees();
         //$this->load->view('employees/home', $data);
-        $this->load->view('employees/list', $data);
+        //$this->load->view('employees/list', $data);
+        $this->load->view('employees/create', $data);
+        //$this->load->view('employees/edit', $data);
         //$this->load->view('header', $data);
     }
 

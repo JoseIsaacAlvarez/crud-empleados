@@ -1,35 +1,39 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Empleado</title>
-</head>
-<body>
-    <h2>Editar Empleado</h2>
-    <form method="post" action="<?php echo site_url('employees/update/'.$employee->employee_id); ?>">
-        <label>Nombre:</label>
-        <input type="text" name="employee_name" value="<?php echo $employee->employee_name; ?>" required><br>
+<?php $this->load->view("header"); ?>
 
-        <label>Apellido:</label>
-        <input type="text" name="last_name" value="<?php echo $employee->last_name; ?>" required><br>
+    <div class="container mt-5">
+        <h2 class="mb-4">Editar Empleado</h2>
+        <form method="post" action="<?php echo site_url('employees/update/'.$employee->employee_id); ?>" class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Nombre:</label>
+                <input type="text" class="form-control" name="employee_name" value="<?php echo $employee->employee_name; ?>" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Apellido:</label>
+                <input type="text" class="form-control" name="last_name" value="<?php echo $employee->last_name; ?>" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email:</label>
+                <input type="email" class="form-control" name="email" value="<?php echo $employee->email; ?>" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Fecha de Nacimiento:</label>
+                <input type="date" class="form-control" name="birthdate" value="<?php echo $employee->birthdate; ?>" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Departamento:</label>
+                <input type="number" class="form-control" name="department_id" value="<?php echo $employee->department_id; ?>" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Fecha de Contratación:</label>
+                <input type="date" class="form-control" name="hiring_date" value="<?php echo $employee->hiring_date; ?>" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Rol:</label>
+                <input type="number" class="form-control" name="role_id" value="<?php echo $employee->role_id; ?>" required>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+        </form>
+    </div>
 
-        <label>Email:</label>
-        <input type="email" name="email" value="<?php echo $employee->email; ?>" required><br>
-
-        <label>Fecha de Nacimiento:</label>
-        <input type="date" name="birthdate" value="<?php echo $employee->birthdate; ?>" required><br>
-
-        <label>Departamento:</label>
-        <input type="number" name="department_id" value="<?php echo $employee->department_id; ?>" required><br>
-
-        <label>Fecha de Contratación:</label>
-        <input type="date" name="hiring_date" value="<?php echo $employee->hiring_date; ?>" required><br>
-
-        <label>Rol:</label>
-        <input type="number" name="role_id" value="<?php echo $employee->role_id; ?>" required><br>
-
-        <button type="submit">Actualizar</button>
-    </form>
-</body>
-</html>
