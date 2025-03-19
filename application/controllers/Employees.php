@@ -15,10 +15,12 @@ class Employees extends MY_Controller {
      */
     public function index() {
 
-        if ($this->session->userdata('role_id') != 1) {
-            $this->load->view('errors/forbidden');
-            return;
-        }
+        // if ($this->session->userdata('role_id') != 2) {
+        //     $this->load->view('errors/forbidden');
+        //     return;
+        // }
+
+        $this->check_role(2); 
         
 
         $data['employees'] = $this->Employee->get_all_employees();
