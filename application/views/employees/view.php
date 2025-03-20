@@ -38,7 +38,7 @@
           <td>{{ employee.role_name }}</td>
           <td>
             <button v-if="role_id_employee == 1" class="btn btn-warning btn-sm me-2" @click="openModal(employee.employee_id)">Editar</button>
-            <button v-if="role_id_employee == 1" class="btn btn-danger btn-sm" @click="deleteEmployee(employee.employee_id)">Eliminar</button>
+            <button v-if="role_id_employee == 1 && user_id_employee != employee.employee_id" class="btn btn-danger btn-sm" @click="deleteEmployee(employee.employee_id)">Eliminar</button>
           </td>
         </tr>
       </tbody>

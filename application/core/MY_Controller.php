@@ -19,7 +19,7 @@ class MY_Controller extends CI_Controller
 
     protected function check_permission() {
         $role_id = $this->session->userdata('role_id');
-        if ($this->session->userdata('role_id') != $role_id) {
+        if ($role_id != 1) {
             redirect('restricted_access/');
         }
     }

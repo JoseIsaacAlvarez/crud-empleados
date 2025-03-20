@@ -17,7 +17,9 @@
     var SITE_URL = "<?php echo site_url(); ?>";
     var BASE_URL = '<?= base_url();?>';
     role_id = <?php echo $this->session->userdata('role_id'); ?> ? <?php echo $this->session->userdata('role_id'); ?> : 0;
+    user_id = <?php echo $this->session->userdata('user_id'); ?> ? <?php echo $this->session->userdata('user_id'); ?> : 0;
     localStorage.setItem('role_id', role_id);
+    localStorage.setItem('user_id', user_id);
     </script>
 
     
