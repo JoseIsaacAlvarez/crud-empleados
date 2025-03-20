@@ -10,26 +10,51 @@ class Employee extends CI_Model {
     /**
      * Obtener todos los empleados con información de roles y departamentos.
      */
-    public function get_all_employees() {
+    public function get_all_employees($limit, $offset, $search = '') {
         $this->db->select('e.*, d.department_name, r.role_name');
         $this->db->from('employees e');
         $this->db->join('departments d', 'e.department_id = d.department_id', 'left');
         $this->db->join('roles r', 'e.role_id = r.role_id', 'left');
+    
+        // Aplicar filtro de búsqueda si existe
+        if (!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('e.employee_name', $search);
+            $this->db->or_like('e.last_name', $search);
+            $this->db->or_like('d.department_name', $search);
+            $this->db->group_end();
+        }
+    
+        $this->db->limit($limit, $offset);
         $query = $this->db->get();
         return $query->result();
     }
-
+    
     /**
-     * Obtener un empleado por su ID
-     */
-    public function get_employee_by_id($id) {
-        $this->db->select('e.*, d.department_name, r.role_name');
+     * contar empleados con búsqueda
+     */    
+    public function count_all_employees($search = '') {
         $this->db->from('employees e');
         $this->db->join('departments d', 'e.department_id = d.department_id', 'left');
-        $this->db->join('roles r', 'e.role_id = r.role_id', 'left');
-        $this->db->where('e.employee_id', $id);
-        $query = $this->db->get();
-        return $query->row(); // Devuelve un solo objeto
+    
+        if (!empty($search)) {
+            $this->db->group_start();
+            $this->db->like('e.employee_name', $search);
+            $this->db->or_like('e.last_name', $search);
+            $this->db->or_like('d.department_name', $search);
+            $this->db->group_end();
+        }
+    
+        return $this->db->count_all_results();
+    }
+
+    /**
+     * Obtener un empleado por email
+     */
+    public function email_exists($email) {
+        $this->db->where('email', $email);
+        $exists = $this->db->count_all_results('employees') > 0;
+        return $exists ? true : false; 
     }
 
     /**
@@ -40,12 +65,32 @@ class Employee extends CI_Model {
     }
 
     /**
+     *   Obtener un empleado por ID
+     */
+    public function get_employee_by_id($id) {
+        return $this->db->get_where('employees', ['employee_id' => $id])->row_array();
+    }
+
+     /**
      * Actualizar un empleado por su ID
      */
+    // public function update_employee($id, $data) {
+    //     // if (empty($data)) {
+    //     //     return false; // Evita ejecutar la consulta si no hay datos
+    //     // }
+    //     $this->db->where('employee_id', $id);
+    //     return $this->db->update('employees', $data);
+    // }
     public function update_employee($id, $data) {
+        if (empty($data) || !is_array($data)) {
+            return false; // Evita ejecutar la consulta si no hay datos válidos
+        }
+    
         $this->db->where('employee_id', $id);
-        return $this->db->update('employees', $data);
+        $this->db->set($data); // Usa set() para asegurarse de que los datos se asignen correctamente
+        return $this->db->update('employees');
     }
+    
 
     /**
      * Eliminar un empleado por su ID
@@ -54,4 +99,15 @@ class Employee extends CI_Model {
         $this->db->where('employee_id', $id);
         return $this->db->delete('employees');
     }
+
+    /**
+     *   Obtener un empleado logueado
+     */
+    public function get_logged_employee($user_id) {
+        $this->db->select("CONCAT(employee_name, ' ', last_name) AS name");
+        $this->db->where('employee_id', $user_id);
+        $query = $this->db->get('employees');
+        return $query->row();
+    }
+    
 }

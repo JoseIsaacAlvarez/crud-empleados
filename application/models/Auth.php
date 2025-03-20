@@ -3,9 +3,16 @@ class Auth extends CI_Model {
 
     public function check_login($email, $password) {
         $this->db->where('email', $email);
-        $this->db->where('password', hash('sha256', $password));
         $query = $this->db->get('employees');
-        return $query->row();
+        
+        $user = $query->row();
+        
+        if ($user && password_verify($password, $user->password)) {
+            return $user; 
+        }
+        
+        return false;
     }
+    
 }
 ?>

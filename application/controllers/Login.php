@@ -3,8 +3,8 @@ class Login extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Employee'); // Cargar el modelo
-        $this->load->helper('url'); // Cargar helper de URL
+        $this->load->model('Employee'); 
+        $this->load->helper('url');
         $this->load->model('Auth');
     }
 
@@ -20,7 +20,7 @@ class Login extends CI_Controller {
         if ($user) {
             $this->session->set_userdata('user_id', $user->employee_id);
             $this->session->set_userdata('role_id', $user->role_id);
-            redirect('employees');
+            redirect('home');
         } else {
             $this->session->set_flashdata('error', 'Credenciales incorrectas.');
             redirect('login');
